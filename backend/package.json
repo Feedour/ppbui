@@ -1,0 +1,17 @@
+{
+  "name": "ppbui-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "author": "meeg",
+  "license": "Apache-2.0",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@hapi/inert": "^5.2.1",
+    "boom": "^7.3.0",
+    "hapi": "17.1.0",
+    "hapi-mongodb": "^9.0.0"
+  }
+}
