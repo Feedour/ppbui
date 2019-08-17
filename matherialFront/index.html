@@ -4,77 +4,76 @@
         <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
-    <body ng-app="BattleUI">
+    <body ng-app="BattleUI" style="font-family: monospace">
 
     <div ng-controller="WatchersController"><!-- layout="column">-->
 
-        <!--<md-toolbar style="background: blue">
-            <h1>{{ title }}</h1>
-        </md-toolbar>-->
-        <!--<div class="container" layout="row" flex ng-cloak style="background:cadetblue; height: 500px;">-->
+        <md-toolbar style="background:black; color:white; text-align: center;">
+            <h1 style="margin-top: 7px;">{{ title }}</h1>
+        </md-toolbar>
+       
             <div class="container">
-                <!-- ДОБАВИТЬ АВТОПЕРЕНОС ПО СТРОКАМ  -->
-                <!--<div class="row">
-                    <div ng-repeat="w in watchers" ng-if="w.active" class="col-sm card" style="width: 200px;">
-                            <img class="card-img-top" src="gif/{{w.id}}.gif" alt="Card image cap">
-                            <div ng-if="w.alive" class="card-body" style="background: rgb(50,200,50); color: white">
-                              <h5 class="card-title">{{w.name}}</h5>
-                              <p class="card-text">Жив | Смертей: {{w.deathCnt}}</p>
-                            </div>
-                            <div ng-if="!w.alive" class="card-body" style="background: rgb(200,50,50); color: white">
-                                    <h5 class="card-title">{{w.name}}</h5>
-                                    <p class="card-text">Убит | Смертей: {{w.deathCnt}}</p>
-                            </div> 
-                    </div>  
-                </div>-->
-                <div class="row" ng-repeat="watchersRow in chunkedWatchers">
+                <!--<div class="row" ng-repeat="watchersRow in chunkedWatchers">
                         <div ng-repeat="w in watchersRow" ng-if="w.active" class="col-sm card" style="width: 200px;">
                         <object class="card-img-top" data="gif/{{w.id}}.gif" type="image/png">
                             <img class="card-img-top" src="gif/0.gif" alt="Card image cap">
                         </object>
                         
                         <div ng-if="w.alive" class="card-body" style="background: rgb(50,200,50); color: white">
-                          <h5 class="card-title">{{w.name}}</h5>
+                          <h5 class="card-title" style="overflow-wrap: normal;">{{w.name}}</h5>
                           <p class="card-text">Жив | Смертей: {{w.deathCnt}}</p>
                         </div>
                         <div ng-if="!w.alive" class="card-body" style="background: rgb(200,50,50); color: white">
-                                <h5 class="card-title">{{w.name}}</h5>
+                                <h5 class="card-title" style="overflow-wrap: normal;">{{w.name}}</h5>
                                 <p class="card-text">Убит | Смертей: {{w.deathCnt}}</p>
                         </div> 
                 </div>  
+                </div>-->
+
+                <div ng-repeat="(mission, missionWatchers) in watchersByMission">
+                    <button 
+                        class="btn btn-primary" 
+                        type="button" 
+                        data-toggle="collapse"  
+                        ng-attr-data-target="#{{ mission }}" 
+                        aria-expanded="false" 
+                        ng-attr-aria-controls="{{ mission }} "
+                        style="background: #333333;
+                        border-color: #333333;
+                        border-radius: unset;
+                        width: 100%;
+                        box-shadow: 0 0 0 0.2rem rgba(123,123,123,.5);">
+                            Высадка: {{ mission }}
+                    </button>
+                    <!--<md-toolbar style="background:#333333; color:white; text-align: center;">
+                        <h2 style="margin-top: 7px;">{{ mission }}</h2>
+                    </md-toolbar>-->
+                    <div class="collapse show" ng-attr-id="{{ mission }}">
+                    <div class="row" ng-repeat="watchersRow in missionWatchers">
+                            <div ng-repeat="w in watchersRow" ng-if="w.active" class="col-sm card" style="width: 200px;">
+                            <object class="card-img-top" data="gif/{{w.id}}.gif" type="image/png">
+                                <img class="card-img-top" src="gif/0.gif" alt="Card image cap">
+                            </object>
+                            
+                            <div ng-if="w.alive" class="card-body" style="background: rgb(50,200,50); color: white">
+                              <h5 class="card-title" style="overflow-wrap: normal;">{{w.name}}</h5>
+                              <p class="card-text">Жив | Смертей: {{w.deathCnt}}</p>
+                            </div>
+                            <div ng-if="!w.alive" class="card-body" style="background: rgb(200,50,50); color: white">
+                                    <h5 class="card-title" style="overflow-wrap: normal;">{{w.name}}</h5>
+                                    <p class="card-text">Убит | Смертей: {{w.deathCnt}}</p>
+                            </div> 
+                    </div>  
+                    </div>
                 </div>
+                </div>
+
             </div>
-            <!--<md-grid-list md-cols="3" md-gutter="10px" md-row-height="1:1" style="display: inline-flex">
-                <md-grid-tile ng-repeat="w in watchers" style="position:relative; width: 200px; margin-left: 1px; border: indigo; border-width: 2px;">
-                    <md-grid-tile-header style="background: #222222"><h3>{{w.name}}</h3></md-grid-tile-header>
-                    <img src="svg/{{w.id}}.svg" style="width: 200px; height: 200px;">
-                    Количество смертей: {{w.deathCnt}}
-                    <md-icon md-svg-src="svg/{{w.id}}.svg" style="width: 200px; height: 200px;"></md-icon>
-                    <md-grid-tile-footer ng-if="w.alive" style="background: green"><h3>Жив. Смертей: {{w.deathCnt}}</h3></md-grid-tile-footer>
-                    <md-grid-tile-footer ng-if="!w.alive" style="background: red"><h3>Убит Смертей: {{w.deathCnt}}</h3></md-grid-tile-footer>
-                </md-grid-tile>
-                <md-card ng-repeat="w in watchers">
-                    <md-card-header>
-                        <md-card-avatar class="md-user-avatar">
-                            <md-icon md-svg-src="/svg/{{w.id}}.svg" style="width: 200px; height: 200px; border-radius: 50%"></md-icon> 
-                        </md-card-avatar>
-                        <md-card-header-text class="md-title">{{w.name}}</md-card-header-text>
-                    </md-card-header>
-                    <md-card-content>
-                        Жив: {{ w.alive }}
-                        Количество смертей: {{w.deathCnt}}
-                    </md-card-content>
-                </md-card>
-            </md-grid-list>-->
-                <!--<md-list>
-                    <md-list-item ng-repeat="w in watchers">
-                        <md-icon md-svg-src="/svg/{{w.id}}.svg" style="width: 200px; height: 200px; border-radius: 50%"></md-icon>
-                        {{w.name}} - {{w.alive}} - {{w.deathCnt}} смертей
-                    </md-list-item>
-                </md-list>-->
-        <!--</div>-->
         </div>
 
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="node_modules/lodash/lodash.min.js"></script>
         <script src="node_modules/angular/angular.min.js"></script>
         <script src="node_modules/angular-aria/angular-aria.min.js"></script>

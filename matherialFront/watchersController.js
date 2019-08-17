@@ -6,6 +6,7 @@ angular.module('BattleUI',[])
     return {
         getAll : function () {
             return $http.get('http://95.163.181.14:3000/watchers')
+            //return $http.get('http://localhost:3000/watchers')
             .then((resp) => {
               console.log('resp :', resp);
               return resp.data;
@@ -26,6 +27,15 @@ angular.module('BattleUI',[])
   .then((resp) => {
       console.log('resp :', resp);
       $scope.watchers = resp;
+      const watchersByMission = _.groupBy(resp, 'mission');
+      const chunkedWatchersByMission = _.reduce(watchersByMission, (result, value, key) => {
+        result[key] = _.chunk(value, cardInLine);
+        return result;
+      }, {});
+
+
+      $scope.watchersByMission = chunkedWatchersByMission;
+      console.log('$scope.watchersByMission :', $scope.watchersByMission);
       $scope.chunkedWatchers = _.chunk(resp, cardInLine)
   })
     // $http.get('http://95.163.181.14:3000/watchers/')
