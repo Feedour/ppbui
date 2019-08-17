@@ -12,6 +12,6 @@
     "@hapi/inert": "^5.2.1",
     "boom": "^7.3.0",
     "hapi": "17.1.0",
-    "hapi-mongodb": "^9.0.0"
+    "hapi-mongodb": "8.0.0"
   }
 }

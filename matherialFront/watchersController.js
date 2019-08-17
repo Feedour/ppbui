@@ -1,10 +1,11 @@
 'use strict';
+const cardInLine = 5;
 
 angular.module('BattleUI',[])
 .factory('watchersService', function($http) {
     return {
         getAll : function () {
-            return $http.get('http://localhost:3000/watchers')
+            return $http.get('http://95.163.181.14:3000/watchers')
             .then((resp) => {
               console.log('resp :', resp);
               return resp.data;
@@ -12,9 +13,10 @@ angular.module('BattleUI',[])
         }
     }
 })
-.controller('WatchersController', ['$scope', '$http', 'watchersService', function($scope, $http, watchersService) {
+.controller('WatchersController', ['$scope', '$http', 'watchersService',function($scope, $http, watchersService) {
 
 //const getAll = watcherService($http) ;
+  $scope.cardInLine = cardInLine;
   $scope.title = 'Battle UI';
   this.title = 'Battle UI';
   $scope.watchers = [
@@ -24,8 +26,9 @@ angular.module('BattleUI',[])
   .then((resp) => {
       console.log('resp :', resp);
       $scope.watchers = resp;
+      $scope.chunkedWatchers = _.chunk(resp, cardInLine)
   })
-    // $http.get('localhost:3000/watchers/')
+    // $http.get('http://95.163.181.14:3000/watchers/')
     //   .then((resp) => {
     //     console.log('resp :', resp);
     //     return resp;

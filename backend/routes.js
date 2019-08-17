@@ -1,6 +1,6 @@
 
     
-const Boom = require('Boom');
+const Boom = require('boom');
     const killRoute = {
         method: 'GET',
         path: '/kill/{id}',

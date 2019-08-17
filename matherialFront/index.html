@@ -14,7 +14,7 @@
         <!--<div class="container" layout="row" flex ng-cloak style="background:cadetblue; height: 500px;">-->
             <div class="container">
                 <!-- ДОБАВИТЬ АВТОПЕРЕНОС ПО СТРОКАМ  -->
-                <div class="row">
+                <!--<div class="row">
                     <div ng-repeat="w in watchers" ng-if="w.active" class="col-sm card" style="width: 200px;">
                             <img class="card-img-top" src="gif/{{w.id}}.gif" alt="Card image cap">
                             <div ng-if="w.alive" class="card-body" style="background: rgb(50,200,50); color: white">
@@ -26,6 +26,22 @@
                                     <p class="card-text">Убит | Смертей: {{w.deathCnt}}</p>
                             </div> 
                     </div>  
+                </div>-->
+                <div class="row" ng-repeat="watchersRow in chunkedWatchers">
+                        <div ng-repeat="w in watchersRow" ng-if="w.active" class="col-sm card" style="width: 200px;">
+                        <object class="card-img-top" data="gif/{{w.id}}.gif" type="image/png">
+                            <img class="card-img-top" src="gif/0.gif" alt="Card image cap">
+                        </object>
+                        
+                        <div ng-if="w.alive" class="card-body" style="background: rgb(50,200,50); color: white">
+                          <h5 class="card-title">{{w.name}}</h5>
+                          <p class="card-text">Жив | Смертей: {{w.deathCnt}}</p>
+                        </div>
+                        <div ng-if="!w.alive" class="card-body" style="background: rgb(200,50,50); color: white">
+                                <h5 class="card-title">{{w.name}}</h5>
+                                <p class="card-text">Убит | Смертей: {{w.deathCnt}}</p>
+                        </div> 
+                </div>  
                 </div>
             </div>
             <!--<md-grid-list md-cols="3" md-gutter="10px" md-row-height="1:1" style="display: inline-flex">
@@ -59,6 +75,7 @@
         <!--</div>-->
         </div>
 
+        <script src="node_modules/lodash/lodash.min.js"></script>
         <script src="node_modules/angular/angular.min.js"></script>
         <script src="node_modules/angular-aria/angular-aria.min.js"></script>
         <script src="node_modules/angular-animate/angular-animate.min.js"></script>

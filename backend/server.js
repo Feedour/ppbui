@@ -1,6 +1,6 @@
 const Hapi = require('hapi'); 
 const Inert = require('@hapi/inert');
-const Boom = require('Boom');
+const Boom = require('boom');
 
 const launch = async () => {
 
