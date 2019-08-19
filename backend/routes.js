@@ -130,6 +130,28 @@ const Boom = require('boom');
                 }
             }
     }
+    const initAllRoute = {
+        method: 'GET',
+        path: '/watchers/init',
+        async handler(request) {
+ 
+            const db = request.mongo.db;
+            const ObjectID = request.mongo.ObjectID;
+ 
+            try {
+                const result = db.collection('watchers')
+                .updateMany(
+                    {},
+                    { $set: {active: true, alive: true, deathCnt: 0},},
+                    { returnNewDocument: true})
+                
+                return result;
+            }
+            catch (err) {
+                throw Boom.internal('Internal MongoDB error', err);
+            }
+        }
+}
     const photoRoute = {
             method: 'GET',
             path: '/photo/{id}',
@@ -137,4 +159,4 @@ const Boom = require('boom');
                 return h.file(`${request.params.id}.jpg`)
             }
     };
-    module.exports = {killRoute, healRoute, allRoute, photoRoute, deactivateAllRoute};
+    module.exports = {killRoute, healRoute, allRoute, photoRoute, deactivateAllRoute, initAllRoute};

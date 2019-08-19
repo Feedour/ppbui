@@ -34,7 +34,7 @@ const launch = async () => {
         }
     })
 
-    const {killRoute, healRoute, allRoute, photoRoute, deactivateAllRoute} = require('./routes');
+    const {killRoute, healRoute, allRoute, photoRoute, deactivateAllRoute, initAllRoute} = require('./routes');
     server.route( {
         method: 'GET',
         path: '/users/{id}',
@@ -58,6 +58,7 @@ const launch = async () => {
     server.route(allRoute);
     //server.route(photoRoute);
     server.route(deactivateAllRoute);
+    server.route(initAllRoute);
     try { 
         await server.start(); 
     } catch (err) { 
