@@ -1,0 +1,1 @@
+ssh -i /c/Users/Lenovo/Downloads/MongoDB-8475_id_rsa.pem ubuntu@95.163.181.14
