@@ -56,13 +56,13 @@
                                 <img class="card-img-top" src="gif/0-min.gif" alt="Card image cap">
                             </object>
                             
-                            <div ng-if="w.alive" class="card-body" style="background: rgb(50,50,200); color: white; padding: 0.5rem;">
+                            <div ng-dblclick="heal(w.id)" ng-if="w.alive" class="card-body" style="background: rgb(50,50,200); color: white; padding: 0.5rem;">
                               <h5 class="card-title" style="overflow-wrap: normal; margin-bottom: 0rem; font-size: 1rem; text-align: center;">{{w.name}}</h5>
-                              <p class="card-text" style="text-align: center">Жив|{{w.deathCnt}}</p>
+                              <p class="card-text" style="text-align: center">Жив|{{7 - w.deathCnt}}</p>
                             </div>
-                            <div ng-if="!w.alive" class="card-body" style="background: rgb(200,50,50); color: white; padding: 0.5rem;">
+                            <div ng-dblclick="heal(w.id)" ng-if="!w.alive" class="card-body" style="background: rgb(200,50,50); color: white; padding: 0.5rem;">
                                     <h5 class="card-title" style="overflow-wrap: normal; margin-bottom: 0rem; font-size: 1rem;  text-align: center;">{{w.name}}</h5>
-                                    <p class="card-text" style="text-align: center">Убит|{{w.deathCnt}}</p>
+                                    <p class="card-text" style="text-align: center">Убит|{{7 - w.deathCnt}}</p>
                             </div> 
                     </div>  
                     </div>

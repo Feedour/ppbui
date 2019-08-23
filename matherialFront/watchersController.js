@@ -11,6 +11,14 @@ angular.module('BattleUI',[])
               console.log('resp :', resp);
               return resp.data;
             })
+        },
+        heal: function (id) {
+          return $http.get(`http://95.163.181.14:3000/heal/${id}`)
+          //return $http.get(`http://localhost:3000/heal/${id}`)
+          .then((resp) => {
+            console.log('resp :', resp);
+            return resp.data;
+          })
         }
     }
 })
@@ -33,6 +41,7 @@ angular.module('BattleUI',[])
         return result;
       }, {});
 
+      $scope.heal = watchersService.heal;
 
       $scope.watchersByMission = chunkedWatchersByMission;
       console.log('$scope.watchersByMission :', $scope.watchersByMission);
