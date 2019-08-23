@@ -51,7 +51,7 @@
                     </md-toolbar>-->
                     <div class="collapse show" ng-attr-id="{{ mission }}">
                     <div class="row" ng-repeat="watchersRow in missionWatchers" style="max-width: 100%; margin: 0px;">
-                            <div ng-repeat="w in watchersRow" ng-if="w.active" class="col-sm card" style="width: 200px; padding-left: 0px; padding-right: 0px;">
+                            <div ng-repeat="w in watchersRow" ng-if="w.active" class="col-sm card" style="max-width: 20%; width: 200px; padding-left: 0px; padding-right: 0px;">
                             <object class="card-img-top" data="gif/{{w.id}}-min.gif" type="image/png">
                                 <img class="card-img-top" src="gif/0-min.gif" alt="Card image cap">
                             </object>

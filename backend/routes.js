@@ -23,14 +23,17 @@ const Boom = require('boom');
                         );
                         return result;
                     } else {
-                        const result = await db.collection('watchers')
-                        .findOneAndUpdate(
-                            { id: request.params.id},
-                            { $set: { alive: false },
-                              $inc: { deathCnt: 1}},
-                            { returnNewDocument: true }
-                        );
-                        return result;
+                        if (watcher.alive){
+                            const result = await db.collection('watchers')
+                            .findOneAndUpdate(
+                                { id: request.params.id},
+                                { $set: { alive: false },
+                                  $inc: { deathCnt: 1}},
+                                { returnNewDocument: true }
+                            );
+                            return result;
+                        }
+                        return "watcher is already dead";
                     }
                 }
                 return Boom.notFound(`There is no watcher with id: ${request.params.id}`);
